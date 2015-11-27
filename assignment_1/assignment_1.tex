@@ -1,0 +1,187 @@
+
+% Document class: article with font size 11pt
+% ---------------
+\documentclass[11pt,a4paper]{article}
+
+\setlength{\textwidth}{165mm}
+\setlength{\textheight}{240mm}
+\setlength{\parindent}{0mm} % S{\aa} meget rykkes ind efter afsnit
+\setlength{\parskip}{\baselineskip}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\setlength{\hoffset}{-2.5mm}
+\setlength{\voffset}{0mm}
+\setlength{\footskip}{15mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\topmargin}{0mm}
+\setlength{\evensidemargin}{0mm}
+
+\usepackage[a4paper, hmargin={2.8cm, 2.8cm}, vmargin={2.5cm, 2.5cm}]{geometry}
+\usepackage[super]{nth}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\usepackage{eso-pic} % \AddToShipoutPicture
+\usepackage{float} % This will allow precise picture placement, use [H].
+
+
+% Call packages
+% ---------------
+\usepackage{comment} %Possible to comment larger sections
+%http://get-software.net/macros/latex/contrib/comment/comment.pdf
+\usepackage[T1]{fontenc} %oriented to output, that is, what fonts to use for printing characters.
+\usepackage[utf8]{inputenc} %allows the user to input accented characters directly from the keyboard
+
+%Support Windows TeXStudio
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+%http://mirrors.dotsrc.org/ctan/fonts/fourier-GUT/doc/latex/fourier/fourier-doc-en.pdf
+\usepackage[english]{babel}														     % Danish
+\usepackage[protrusion=true,expansion=true]{microtype}				                 % Better typography
+%http://www.khirevich.com/latex/microtype/
+\usepackage{amsmath,amsfonts,amsthm, amssymb}							 % Math packages
+\usepackage[pdftex]{graphicx} %puts to pdf and graphic
+%http://www.kwasan.kyoto-u.ac.jp/solarb6/usinggraphicx.pdf
+\usepackage{xcolor,colortbl}
+%http://mirrors.dotsrc.org/ctan/macros/latex/contrib/xcolor/xcolor.pdf
+%http://texdoc.net/texmf-dist/doc/latex/colortbl/colortbl.pdf
+\usepackage{tikz} %documentation http://www.ctan.org/pkg/pgf
+\usepackage{parskip} %http://www.ctan.org/pkg/parskip
+%http://tex.stackexchange.com/questions/51722/how-to-properly-code-a-tex-file-or-at-least-avoid-badness-10000
+%Never use \\ but instead press "enter" twice. See second website for more info
+
+% MATH -------------------------------------------------------------------
+\newcommand{\Real}{\mathbb R}
+\newcommand{\Complex}{\mathbb C}
+\newcommand{\Field}{\mathbb F}
+\newcommand{\RPlus}{[0,\infty)}
+%
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\essnorm}[1]{\norm{#1}_{\text{\rm\normalshape ess}}}
+\newcommand{\abs}[1]{\left\vert#1\right\vert}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\seq}[1]{\left<#1\right>}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\To}{\longrightarrow}
+\newcommand{\RE}{\operatorname{Re}}
+\newcommand{\IM}{\operatorname{Im}}
+\newcommand{\Poly}{{\cal{P}}(E)}
+\newcommand{\EssD}{{\cal{D}}}
+% THEOREMS ----------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+%
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+%
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}[section]
+%
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+
+\author{
+  \Large{
+    Frenzel, Sven Uhrenholdt (\href{mailto:sven@frenzel.dk}{sven@frenzel.dk}) - 130793 - cdn769}\\
+  \Large{
+    Gram, Mads (\href{mailto:mgmadsgram@gmail.com}{mgmadsgram@gmail.com})  - 081293 - wtc324} \\
+  \Large{
+    Brandt, Patrick Krøll, (\href{mailto:ptxxdk@gmail.com}{ptxxdk@gmail.com}) - 081194 - pwx155
+  }\\
+   \\
+   \Large{Wordcount excluding this line: 1036}
+}
+\title{
+  \huge{The Theory of Science for\\ Computer Science (VtDat)\\}
+\vspace{3cm}
+\Large{\nth{1} Group Assignment}
+}
+
+\begin{document}
+
+\AddToShipoutPicture*{\put(0,0){\includegraphics*[viewport=0 0 700 600]{include/natbio-farve}}}
+\AddToShipoutPicture*{\put(0,602){\includegraphics*[viewport=0 600 700 1600]{include/natbio-farve}}}
+
+\AddToShipoutPicture*{\put(0,0){\includegraphics*{include/nat-en}}}
+
+\clearpage\maketitle
+\thispagestyle{empty}
+
+\clearpage\newpage
+\thispagestyle{plain}
+
+
+\section{The Different Views on Computer Science / Datalogy}
+
+
+\subsection{Computer Science Curricula 2013}
+
+
+\subsubsection{Introduction to Computer Science Curricula}
+
+
+The report ``Computer Science Curricula 2013'' (CSC2013) \cite{CSC2013} has been created in cooperation by the ACM\footnote{Association for Computing Machinery} \& IEEE\footnote{Institute of Electrical and Electronics Engineers}; the report primary intention is to frame guidelines for the designing of undergraduate programs in the field of computer science.
+
+The information provided in the report is compiled by a steering committee. The report has been published for over 40 years with a 10 year release cycle. In 2001 the latest complete version was released and then revised in 2008. The current iteration of the report \cite{CSC2013} was released in 2013; for this revisions a focus has been on engaging a broader computer science community, to expand the new opportunities.
+
+\subsection{Computer Science Curricula 2013}
+% Skriv her, hvordan i ser at CSC13, opfatter faget Computer Science.
+
+Peter Naur has redefined how we think about Computer Science in Denmark, today we call the field Datalogy. The reason for this is that Computer Science is a description very non specific, what is science in computers? Very few people actually knows, since it always will include other areas, and that those often becomes a vital source in that specific topic.
+
+
+So instead of answering the question ``What is Computer Science?'' we try to answer what is Dataloy, the answer is quite simple but still quite abstract, according to the body of knowledge, 80\% about computers and 20\% random topics in any field of your choice.
+
+CSC2013 perceive the study of Computer Science in a manner of structure and flexibility.
+The structural parts means that there will be topics that the education will be forced to include such as, problem solving, commitment to life-long learning etc. but those topics will not be forced upon the Computer Science education in the form of predefined curriculum, instead the educations makers should be given some predefined core-ideas and topics, and leave the actual education to the course creators, and allow them to expand into the areas that is needed by their students, the requirement for this lossy structure should be chosen since the broadness of the field computer science is so wide and expands as wide from mathematics to random things such as farming.
+
+
+\subsection{Peter Naur}
+
+Peter Naur views Datalogy as equal to language and arithmetics in that it is used as a tool in many other fields which would not be the same or even possible without it.
+Datalogy is, in the same way as language and arithmetics, a field of its own merit, but also a field that focuses heavily on interdisciplinary integration.
+Naur views 	Datalogy as a discipline that should be taught from primary school all the way through master degrees in all fields.
+When focusing on Datalogy as a field in university education Naur is adamant about focusing the courses to problem oriented project courses. He views inter human relations and man-machine interaction as very important topics. Furthermore he views other project management as essential skills for datalogists.
+On the topic of pure sciences vs applied science Naur is strongly of the opinion that a split would be devastating to the field of Datalogy and thus emphasizes on the teachings that encompass both sides. \cite{naur_datalogy}
+
+\section{Comparative Analysis and Discussion}
+
+
+``Datalogy - The Copenhagen tradition of Computer Science''( Datalogy )\cite{naur_datalogy} describes how the Institute of Computer Science at the University of Copenhagen was established back in 1970, by both students, teachers as well as Peter Naur who had a vital role in making it all happen. To extract from this text is the authors interpretations of Peter Naur's opinions on Compute Science education.
+
+
+Meanwhile CSC2013\cite{CSC2013} delineate suggestions/guidelines for forming an undergraduate Computer Science education. This description is comprehensive and is based in a cooperative effort by ACM and IEEE to create a outline.
+
+
+The two texts are written in very different formats, where CSC2013 is formal and Datalogy is written as an scientific article; and while the essence of the two texts are on the same topic of Computer Science theory.
+For much of Computer Science theory Naur's ideas have been fundamental and often been view as a pillar that then been further developed on. Many of the ideas and principles which are being represented in the modern Computer Science theory is still to this day heavily influenced by Naur's opinions.
+
+The intersection of the opinions represented in CSC2013 and by Naur is an commitment to the graduates ability to continue learning and adapting to a changing landscape of Computer Science; a skill that is regarded as uttermost important for any graduate is the skill of problem solving. From the narrative of Naur presents the following idea``the computer is a tool for people in problem solving'' while CSC2013 defines problem solving as skill which is necessary for graduates to comprehend.
+
+For the ACM Curriculum 68 Naur heavily criticized the encyclopedic manner in which the ACM represented techniques, languages and practices. The version which are to come after we deem have taken from Naur's opinions and they have enabled a more flexible approach to recommending rather than dictating.
+
+\pagebreak
+\section{Consider and Argument for the Core Aspects of Datalogy}
+
+\subsection{Implementation and Optimization}
+
+As a graduate and/or student of Computer Science the ability to write code which naively solves problems is not enough. When solving problems, a systematic approach must be exercised; this systematic approach must emphasize on algorithms and proven data structure usage in development. With this approach optimized code is achievable.
+
+\subsection{Project-skills}
+
+It is vital that Computer Scientist are able to function in teams, since all major software projects are the product of collaboration between developers. The same importance that discussion represents in all projects; collaboration on code is likewise required to achieve great code. When projects like Linux\footnote{ \url{https://www.linux.com/}} have succeeded it is trough collaborative review and discussion of code.
+
+\subsubsection{Technical Depth}
+
+To enable optimized code and to integrate into already established environments it will be necessary to alter system components, to be able to do this a extensive technical knowledge is needed. There are further examples where this will be necessary i.e. optimizations and abstraction. Developers cannot make adequate choices without comprehensive technical knowledge.
+
+
+\newpage
+\bibliography{mybib}
+\bibliographystyle{ieeetr}
+
+
+\end{document}
