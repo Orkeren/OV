@@ -86,18 +86,11 @@
 \author{
   \Large{
     Frenzel, Sven Uhrenholdt (\href{mailto:sven@frenzel.dk}{sven@frenzel.dk}) - 130793 - cdn769}\\
-  \Large{
-    Gram, Mads (\href{mailto:mgmadsgram@gmail.com}{mgmadsgram@gmail.com})  - 081293 - wtc324} \\
-  \Large{
-    Brandt, Patrick Krøll, (\href{mailto:ptxxdk@gmail.com}{ptxxdk@gmail.com}) - 081194 - pwx155
-  }\\
-   \\
-   \Large{Wordcount excluding this line: 1036}
 }
 \title{
-  \huge{The Theory of Science for\\ Computer Science (VtDat)\\}
+  \huge{Compilers\\}
 \vspace{3cm}
-\Large{\nth{1} Group Assignment}
+\Large{\nth{1} Weekly Assignment}
 }
 
 \begin{document}
@@ -114,74 +107,39 @@
 \thispagestyle{plain}
 
 
-\section{The Different Views on Computer Science / Datalogy}
+\section*{Task 1}
+I am a second year Computer Science bachelor student.
+
+I am somewhere in the middle wrt. functional programming and SML, but not very experienced assembler programming as I haven't taken the course ARK. I have seen that Thorkil has posted on Piazza what he beliefs to be the necessary MIPS curriculum for this course.
+
+I do not have any specific expectations except for a deeper understanding of what a programming language is.
+
+\section*{Task 2}
+If call-by-value is used the function returns the value $13$ for \textit{r}, $3$ for \textit{x} and $1$ for \textit{y}.
+
+When using call-by-value all modifications to variables only happen in the scope of the function and not in the scope of the caller. Thus the modifications to \textit{a}, \textit{b} and \textit{c} in the function \textit{f} don't affect \textit{x} and \textit{y} in the scope of the main function.
+
+If call-by-name is used the function returns the value $19$ for \textit{r}, $8$ for \textit{x} and $3$ for \textit{y}.
+
+When using call-by-name every mention of the formal parameters is replaced with the actual parameters. This means that the callee can write into the scope of the caller and overwrite it's own parameters. In the first line of \textit{f} the value of \textit{x} in the caller's and callee's scope is set to $4$ $(3+1)$. In the second line the value of \textit{y} is set to 3. In the third line the value of \textit{x} is set to 8.
+Thus the return value is $8+3+8=19$.
 
 
-\subsection{Computer Science Curricula 2013}
+If call-by-value-result is used the function returns the value $13$ for \textit{r}, $7$ for \textit{x} and $2$ for \textit{y}. 
+
+This happens as the function is executed as call-by-value and then updates the actual parameters in the caller's scope just before returning.
+
+\section*{Task 3}
+With static scoping both f(3) and f(5) would print 4. This happens because g() is called without any argument and thus uses the global x.
+Any x declared or used in h(int y) and f(int x) is bound to the scope of the function and thus not accessible to g().
+
+With dynamic scoping f(3) would print 3 and f(5) would print 7. In f(3) the use of x as formal argument acts as declaration of x and as g() is called before f(3) terminates the most recent declaration of x is 3.
+
+In f(5) x first is declared in f(int x), but then declared again in h(5) as 7. Then g() is called from h(5) and the most recent declaration of x is 7.
 
 
-\subsubsection{Introduction to Computer Science Curricula}
+\section*{Task 4}
+See attached .sml file.
 
-
-The report ``Computer Science Curricula 2013'' (CSC2013) \cite{CSC2013} has been created in cooperation by the ACM\footnote{Association for Computing Machinery} \& IEEE\footnote{Institute of Electrical and Electronics Engineers}; the report primary intention is to frame guidelines for the designing of undergraduate programs in the field of computer science.
-
-The information provided in the report is compiled by a steering committee. The report has been published for over 40 years with a 10 year release cycle. In 2001 the latest complete version was released and then revised in 2008. The current iteration of the report \cite{CSC2013} was released in 2013; for this revisions a focus has been on engaging a broader computer science community, to expand the new opportunities.
-
-\subsection{Computer Science Curricula 2013}
-% Skriv her, hvordan i ser at CSC13, opfatter faget Computer Science.
-
-Peter Naur has redefined how we think about Computer Science in Denmark, today we call the field Datalogy. The reason for this is that Computer Science is a description very non specific, what is science in computers? Very few people actually knows, since it always will include other areas, and that those often becomes a vital source in that specific topic.
-
-
-So instead of answering the question ``What is Computer Science?'' we try to answer what is Dataloy, the answer is quite simple but still quite abstract, according to the body of knowledge, 80\% about computers and 20\% random topics in any field of your choice.
-
-CSC2013 perceive the study of Computer Science in a manner of structure and flexibility.
-The structural parts means that there will be topics that the education will be forced to include such as, problem solving, commitment to life-long learning etc. but those topics will not be forced upon the Computer Science education in the form of predefined curriculum, instead the educations makers should be given some predefined core-ideas and topics, and leave the actual education to the course creators, and allow them to expand into the areas that is needed by their students, the requirement for this lossy structure should be chosen since the broadness of the field computer science is so wide and expands as wide from mathematics to random things such as farming.
-
-
-\subsection{Peter Naur}
-
-Peter Naur views Datalogy as equal to language and arithmetics in that it is used as a tool in many other fields which would not be the same or even possible without it.
-Datalogy is, in the same way as language and arithmetics, a field of its own merit, but also a field that focuses heavily on interdisciplinary integration.
-Naur views 	Datalogy as a discipline that should be taught from primary school all the way through master degrees in all fields.
-When focusing on Datalogy as a field in university education Naur is adamant about focusing the courses to problem oriented project courses. He views inter human relations and man-machine interaction as very important topics. Furthermore he views other project management as essential skills for datalogists.
-On the topic of pure sciences vs applied science Naur is strongly of the opinion that a split would be devastating to the field of Datalogy and thus emphasizes on the teachings that encompass both sides. \cite{naur_datalogy}
-
-\section{Comparative Analysis and Discussion}
-
-
-``Datalogy - The Copenhagen tradition of Computer Science''( Datalogy )\cite{naur_datalogy} describes how the Institute of Computer Science at the University of Copenhagen was established back in 1970, by both students, teachers as well as Peter Naur who had a vital role in making it all happen. To extract from this text is the authors interpretations of Peter Naur's opinions on Compute Science education.
-
-
-Meanwhile CSC2013\cite{CSC2013} delineate suggestions/guidelines for forming an undergraduate Computer Science education. This description is comprehensive and is based in a cooperative effort by ACM and IEEE to create a outline.
-
-
-The two texts are written in very different formats, where CSC2013 is formal and Datalogy is written as an scientific article; and while the essence of the two texts are on the same topic of Computer Science theory.
-For much of Computer Science theory Naur's ideas have been fundamental and often been view as a pillar that then been further developed on. Many of the ideas and principles which are being represented in the modern Computer Science theory is still to this day heavily influenced by Naur's opinions.
-
-The intersection of the opinions represented in CSC2013 and by Naur is an commitment to the graduates ability to continue learning and adapting to a changing landscape of Computer Science; a skill that is regarded as uttermost important for any graduate is the skill of problem solving. From the narrative of Naur presents the following idea``the computer is a tool for people in problem solving'' while CSC2013 defines problem solving as skill which is necessary for graduates to comprehend.
-
-For the ACM Curriculum 68 Naur heavily criticized the encyclopedic manner in which the ACM represented techniques, languages and practices. The version which are to come after we deem have taken from Naur's opinions and they have enabled a more flexible approach to recommending rather than dictating.
-
-\pagebreak
-\section{Consider and Argument for the Core Aspects of Datalogy}
-
-\subsection{Implementation and Optimization}
-
-As a graduate and/or student of Computer Science the ability to write code which naively solves problems is not enough. When solving problems, a systematic approach must be exercised; this systematic approach must emphasize on algorithms and proven data structure usage in development. With this approach optimized code is achievable.
-
-\subsection{Project-skills}
-
-It is vital that Computer Scientist are able to function in teams, since all major software projects are the product of collaboration between developers. The same importance that discussion represents in all projects; collaboration on code is likewise required to achieve great code. When projects like Linux\footnote{ \url{https://www.linux.com/}} have succeeded it is trough collaborative review and discussion of code.
-
-\subsubsection{Technical Depth}
-
-To enable optimized code and to integrate into already established environments it will be necessary to alter system components, to be able to do this a extensive technical knowledge is needed. There are further examples where this will be necessary i.e. optimizations and abstraction. Developers cannot make adequate choices without comprehensive technical knowledge.
-
-
-\newpage
-\bibliography{mybib}
-\bibliographystyle{ieeetr}
-
-
+Thanks to your comments I managed to clean up the code a \textbf{lot} and make it run without any errors or warnings. Furthermore compr is implemented.
 \end{document}

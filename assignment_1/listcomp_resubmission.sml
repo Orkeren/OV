@@ -48,107 +48,71 @@ fun eval vtable e =
     | List l => ListVal (map (eval vtable) l)
     | Compr (e, k, a, p) => 
         (case eval vtable a of
-          ListVal x =>
-            (case p of 
-                NONE => 
-                  let
-                    fun fun1 an = eval [(k, an)] e
-                    val a1 = eval vtable a
-                  in
-                    map fun1 a1
-                  end
-              | SOME p1 => raise Fail "Not handled.")
-      | _ => raise Fail "Only functions that produce lists please!")
+            ListVal vs =>
+              (case p of 
+                  NONE => ListVal (map (fn v => eval (insert k v vtable) e) vs)
+                | SOME p1 => 
+                    ListVal (foldr (fn (v, vv) => 
+                      if (eval (insert k v vtable) p1 = IntVal 1) 
+                        then ([(eval (insert k v vtable) e)] @ vv) 
+                        else [] @ vv) [] vs))
+          | _ => raise Fail "Expression in list position of comprehension does not evaluate to a list.") 
     | Range (x,y) =>
-        let
-          val IntVal x1 = eval vtable x
-          val IntVal y1 = eval vtable y
-        in
-          ListVal (map IntVal (range x1 y1 []))
-        end
+        (case eval vtable x of
+        IntVal a =>
+        (case eval vtable y of
+          IntVal b => ListVal (map IntVal (range a b []))
+        | _ => raise Fail "Only IntVals please!")
+      | _ => raise Fail "Only IntVals please")
     | Plus (x,y) => 
         (case eval vtable x of
         IntVal a =>
         (case eval vtable y of
-          IntVal b =>
-            let
-              val IntVal x1 = eval vtable x
-              val IntVal y1 = eval vtable y
-            in
-              IntVal (x1+y1)
-            end
-        | ListVal bb => raise Fail "No lists please!")
-      | ListVal aa => raise Fail "No lists please!")
+          IntVal b => IntVal (a+b)
+        | _ => raise Fail "Only IntVals please!")
+      | _ => raise Fail "Only IntVals please")
     | Minus (x,y) => 
         (case eval vtable x of
         IntVal a =>
         (case eval vtable y of
-          IntVal b =>
-            let
-              val IntVal x1 = eval vtable x
-              val IntVal y1 = eval vtable y
-            in
-              IntVal (x1-y1)
-            end
-        | ListVal bb => raise Fail "No lists please!")
-      | ListVal aa => raise Fail "No lists please!")
+          IntVal b => IntVal (a-b)
+        | _ => raise Fail "Only IntVals please!")
+      | _ => raise Fail "Only IntVals please")
     | Times (x,y) => 
         (case eval vtable x of
         IntVal a =>
         (case eval vtable y of
-          IntVal b =>
-            let
-              val IntVal x1 = eval vtable x
-              val IntVal y1 = eval vtable y
-            in
-              IntVal (x1*y1)
-            end
-        | ListVal bb => raise Fail "No lists please!")
-      | ListVal aa => raise Fail "No lists please!")
+          IntVal b => IntVal (a*b)
+        | _ => raise Fail "Only IntVals please!")
+      | _ => raise Fail "Only IntVals please")
     | Modulo (x,y) => 
         (case eval vtable x of
         IntVal a =>
         (case eval vtable y of
-          IntVal b =>
-            let
-              val IntVal x1 = eval vtable x
-              val IntVal y1 = eval vtable y
-            in
-              IntVal (x1 mod y1)
-            end
-        | ListVal bb => raise Fail "No lists please!")
-      | ListVal aa => raise Fail "No lists please!")
+          IntVal b => IntVal (a mod b)
+        | _ => raise Fail "Only IntVals please!")
+      | _ => raise Fail "Only IntVals please")
     | Equal (x,y) => 
         (case eval vtable x of
         IntVal a =>
         (case eval vtable y of
           IntVal b =>
-            let
-              val IntVal x1 = eval vtable x
-              val IntVal y1 = eval vtable y
-            in
-              if x1 = y1 then IntVal 1 else IntVal 0
-            end
-        | ListVal bb => raise Fail "No lists please!")
-      | ListVal aa => raise Fail "No lists please!")
-    | Less (x,y) =>
-(case eval vtable x of
+            if a = b then IntVal 1 else IntVal 0
+        | _ => raise Fail "Only IntVals please!")
+      | _ => raise Fail "Only IntVals please")
+    | Less (x,y) => 
+        (case eval vtable x of
         IntVal a =>
         (case eval vtable y of
           IntVal b =>
-            let
-              val IntVal x1 = eval vtable x
-              val IntVal y1 = eval vtable y
-            in
-              if x1 < y1 then IntVal 1 else IntVal 0 
-            end
-        | ListVal bb => raise Fail "No lists please!")
-      | ListVal aa => raise Fail "No lists please!")
+            if a < b then IntVal 1 else IntVal 0
+        | _ => raise Fail "Only IntVals please!")
+      | _ => raise Fail "Only IntVals please")
 
 fun intConst x = (Const (IntVal x))
-(*
 
-Tests commented out as they would currently raise exceptions.
+
+(* Tests commented out as they would currently raise exceptions. *)
 
 (* Python: xs = range(0,9) *)
 val xs = Range (intConst 0, intConst 9)
@@ -197,4 +161,3 @@ val test6 = eval [] (Compr (Compr (Times (Var "x", Var "y"),
                             "y",
                             xs,
                             NONE))
-*)
