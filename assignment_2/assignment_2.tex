@@ -110,22 +110,45 @@
 \section{Task 1}
 \begin{enumerate}
 	\item[a.)] $\left([og][og]\right)^{+}|\left([og][og][og]\right)^{+}$
-	\item[b.)] \begin{align*}
-			\textbf{T} \rightarrow \textbf{R}\ |\ a\textbf{T}b \\
-			\textbf{R} \rightarrow c\ |\ c\textbf{R}
-		\end{align*}
+	\item[b.)]$\textbf{T} \rightarrow \textbf{R}\ |\ a\textbf{T}b$
+	
+			  $\textbf{R} \rightarrow c\ |\ c\textbf{R}$
 	\item[c).] let-expressions
 		\begin{enumerate}
 			\item[(i)] As the association of let expressions depends on the content of itself we need to define it for every instance of itself. This is accomplished by \%prec letprec, as it sets the association of the particular instance of the let-expression.
-			\item[(ii)] 
+			\item[(ii)] \texttt{\$n} refers to the $n^{th}$ element of the statement. \texttt{\$1} referes to LET, \texttt{\$2} to ID, etc. \texttt{\#m \$n} refers to the $n^{th}$ element in \texttt{\$n}. \texttt{\#1 \$2} thus refers to the first element of ID. Both \texttt{\$} and \texttt{\#} are 1-indexed.
+			
+			Dec declares something. In this case a declaration with the first element of ID, the first Exp and EQ as the position.
+			
+			Let is the actual reference to the implementation in the interpreter or intermediate code generator. It passes the declaration into the body and then passes it's body (the second occurrence of Exp) and the position of the let expression (\$1).
 		\end{enumerate}	
 \end{enumerate}
 
 
 \section{Task 2}
 \begin{enumerate}
-	\item[a.)] (’a -> bool) -> ’a list -> ’a list
-	\item[b.)]
+	\item[a.)] \texttt{(’a -> bool) -> ’a list -> ’a list}
+	\item[b.)] \begin{verbatim}
+		CheckExp(exp, vtable, ftable) = case Exp of
+		filter(p, arr_exp) =>
+		(f, t_0) = GetTypeId (p)
+		t_1 = GetTypes (p)
+		t_2 = CheckExp (arr_exp, vtable, ftable)
+		if (t_1 == t_2 andalso t_0 == Bool)
+		then t_1
+		else error(); t1
+	\end{verbatim}
+	\item[c.)] \begin{verbatim}
+		CheckExp(exp, vtable, ftable) = case exp of
+		filter( Lambda(ret_type, id_type_lst, body), arr_exp ) =>
+		t_0 = CheckExp(ret_type, vtable, ftable)
+		t_1 = CheckExp(body, vtable, ftable)
+		(v, t_2) = id_type_lst
+		t_3 = CheckExp (arr_exp, vtable, ftable)
+		if (t_1 == t_2 andalso t_2 == t_3 andalso t_0 == Bool)
+		then t_1
+		else error(); t1
+	\end{verbatim}
 \end{enumerate}
 
 
