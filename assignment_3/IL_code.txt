@@ -1,0 +1,31 @@
+vtable=[a->v, b->w]
+
+while (b != 0) && (a/b != 0) {
+      if b < a then { a := a - b }
+               else { b := b - a }
+  }
+
+  LABEL l_s0
+    t_1 := w
+    t_2 := 0
+    IF t_1 != t_2 THEN l_t0 else l_f
+    LABEL l_t0
+      t_3 := w
+      t_4 := v
+      t_5 := t_3 / t_4
+      t_6 := 0
+      IF t_5 != t_6 THEN l_t1 else l_f
+      LABEL l_t1
+        t_7 := w
+        t_8 := v
+        IF t_7 < t_8 THEN l_t2 else l_f2
+        LABEL l_t2
+          t_9 := v
+          t_10 := w
+          v := t_9 - t_10
+        LABEL l_f2
+          t_11 := w
+          t_12 := v
+          w := t_11 - t_12
+      GOTO l_s0
+  LABEL l_f
